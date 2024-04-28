@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="manifest" href="site.webmanifest">
+	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+	<!-- CSS here -->
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="assets/css/slicknav.css">
+	<link rel="stylesheet" href="assets/css/flaticon.css">
+	<link rel="stylesheet" href="assets/css/animate.min.css">
+	<link rel="stylesheet" href="assets/css/magnific-popup.css">
+	<link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+	<link rel="stylesheet" href="assets/css/themify-icons.css">
+	<link rel="stylesheet" href="assets/css/slick.css">
+	<link rel="stylesheet" href="assets/css/nice-select.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Appointment | Business Shifu</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .calendar {
+        width: 70%;
+        margin: 0 auto;
+        padding: 10px;
+        /* background-color: #ff6c02; */
+    }
+    .month-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        margin-left: 20px;
+        width: 80%;
+        margin: auto;
+        /* background-color: black; */
+        text-align: center;
+    }
+    .month-nav i {
+        cursor: pointer;
+    }
+    .calendar table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .calendar th,
+    .calendar td {
+        text-align: center;
+        padding: 15px;
+        border: 1px solid #ccc;
+    }
+    .calendar td:hover {
+        background-color: #f0f0f0;
+        cursor: pointer;
+    }
+    .selected {
+        background-color: #ff6c02 !important;
+        color: white;
+    }
+    .calendar-div{
+        width: 60%;
+        padding: 20px;
+        margin: auto;
+        text-align: center;
+        /* background-color: rgb(175, 61, 61); */
+    }
+    #currentMonth{
+        /* font-weight: bold; */
+        /* color: #ff6c02; */
+        font-size: 24px;
+    }
+    #prevMonth, #nextMonth{
+        /* color: #ff6c02; */
+        font-weight: bold;
+        font-size: 20px;
+    }
+    #calendarTable{
+        /* background-color: aqua; */
+    }
+    #time-div{
+        padding: 10px;
+        width: 150px;
+        text-align: center;
+        font-size: 15px;
+        font-weight: bold;
+        margin: auto;
+        background-color: white;
+        border: 4px solid whitesmoke;
+
+    }
+    #time-text{
+        margin-left: 30px;
+        font-weight: bold;
+        font-size: 15px;
+        text-align: justify;
+        color: black;
+    }
+    .others{
+        width: 300px;
+        margin: 0 auto;
+        padding: 10px;
+        text-align: center;
+        /* background-color: #ccc; */
+    }
+    .all {
+        width: 90%;
+        margin: auto;
+        text-align: center;
+        margin-top: -40px;
+    }
+    .top-logo{
+        width: 230px;
+        height: 230px;
+    }
+    @media (max-width:700px) {
+        .calendar-div{
+            width: 100%;
+            padding: 5px;
+            /* margin-left: -50px; */
+        }
+        .calendar-div .calendar {
+            width: 300px;
+        }
+        #calendar-table{
+            margin: auto;
+            width: 100%;
+        }
+        .calendar th,
+        .calendar td {
+        text-align: center;
+        padding: 7px;
+        border: 1px solid #ccc;
+    }
+    }
+    .submit{
+        padding: 8px;
+        width: 180px;
+        background-color: #ff6c02;
+        border: transparent;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .home-link-div{
+        text-align: justify;
+        color: black;
+        margin-left: 20px;
+        margin-top: 60px;
+    }
+    .home-link-div a {
+        color: white;
+        font-weight: bold;
+        padding: 8px;
+        background-color: #ff6c02;
+        border-radius: 7px;
+    }
+    #for-name{
+        /* color: #ff6c02; */
+        font-weight: bold;
+    }
+    .name-input{
+        width: 300px;
+        padding: 8px;
+        text-align: center;
+        border:  4px solid whitesmoke;
+    }
+</style>
+</head>
+<body>
+<div class="all">
+    <img class="top-logo" src="assets/img/logo/logo_bg.png">
+    <p class="top-text">Book an appointment with us</p>
+<div class="calendar-div">
+<form action="book_process.php" method="post">
+    <div class="calendar">
+        <div class="month-nav">
+            <i id="prevMonth">&lt;</i>
+            <span id="currentMonth"></span>
+            <i id="nextMonth">&gt;</i>
+        </div><br/>
+        <table id="calendarTable"></table>
+        <input type="hidden" id="selectedDate" name="selectedDate"><br/>
+    </div>
+    <div class="others">
+    <label id="time-text">Select Time: </label><br/>
+    <select id="time-div" name="time" required>
+        <option value="1:00pm">9:00 AM</option>
+        <option value="1:00pm">10:00 AM</option>
+        <option value="1:00pm">11:00 AM</option>
+        <option value="1:00pm">12:00 PM</option>
+        <option value="1:00pm">1:00 PM</option>
+        <option value="1:00pm">2:00 PM</option>
+        <option value="1:00pm">3:00 PM</option>
+        <option value="1:00pm">4:00 PM</option>
+        <option value="1:00pm">5:00 PM</option>
+        <option value="1:00pm">6:00 PM</option>
+        <option value="1:00pm">7:00 PM</option>
+        <option value="1:00pm">8:00 PM</option>
+    </select><br/><br/>
+    <label id="for-name">Name:</label><br/>
+    <input type="text" class="name-input" name="name" placeholder="Fullname" required><br/><br/>
+    <label id="for-name">Email:</label><br/>
+    <input type="text" class="name-input" name="email" placeholder="Email" required><br/>
+    </div><br/>
+    <button class="submit" type="submit">Book Appointment</button>
+</form>
+</div><br/><br/>
+<script>
+    let currentDate = new Date();
+    let currentMonth = currentDate.getMonth();
+    let currentYear = currentDate.getFullYear();
+    let selectedDate;
+
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    function generateCalendar(month, year) {
+        const table = document.getElementById("calendarTable");
+        table.innerHTML = "";
+
+        const header = table.createTHead();
+        const row = header.insertRow();
+        for (let day of ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]) {
+            const th = document.createElement("th");
+            th.textContent = day;
+            row.appendChild(th);
+        }
+
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        let date = 1;
+        for (let i = 0; i < 6; i++) {
+            const row = table.insertRow();
+            for (let j = 0; j < 7; j++) {
+                if (i === 0 && j < firstDay) {
+                    const cell = row.insertCell();
+                    cell.textContent = "";
+                } else if (date > daysInMonth) {
+                    break;
+                } else {
+                    const cell = row.insertCell();
+                    cell.textContent = date;
+                    cell.addEventListener("click", function() {
+                        if (selectedDate) {
+                            selectedDate.classList.remove("selected");
+                        }
+                        selectedDate = this;
+                        this.classList.add("selected");
+                        document.getElementById("selectedDate").value = year + "-" + (month + 1) + "-" + this.textContent;
+                    });
+                    date++;
+                }
+            }
+        }
+    }
+
+    function updateCalendar() {
+        document.getElementById("currentMonth").textContent = monthNames[currentMonth] + " " + currentYear;
+        generateCalendar(currentMonth, currentYear);
+    }
+
+    document.getElementById("prevMonth").addEventListener("click", function() {
+        currentMonth -= 1;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear -= 1;
+        }
+        updateCalendar();
+    });
+
+    document.getElementById("nextMonth").addEventListener("click", function() {
+        currentMonth += 1;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear += 1;
+        }
+        updateCalendar();
+    });
+
+    updateCalendar();
+</script>
+</div>
+<footer>
+    <!--? Footer Start-->
+    <div class="footer-area section-bg" >
+        <div class="container">
+            <div class="footer-top footer-padding">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-3 col-lg-4 col-md-5 col-sm-8">
+                        <div class="single-footer-caption mb-50">
+                            <!-- logo -->
+                            <div class="footer-logo">
+                                <a href="index.html"><img class="footer-logo" src="assets/img/logo/logo_bg.png" alt=""></a>
+                            </div>
+                            <div class="footer-tittle">
+                                <div class="footer-pera">
+                                    <p class="info1">Helping you master the art of business.</p>
+                                </div>
+                            </div>
+                            <div class="footer-number">
+                                <!-- <h4><span>+564 </span>7885 3222</h4> -->
+                                <p>70 Bongard Avenue, Ottawa, Ontario, Canada.</p>
+                                <p>info@businessshifu.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Location </h4>
+                                <ul>
+                                    <li><a href="#">Advanced</a></li>
+                                    <li><a href="#"> Management</a></li>
+                                    <li><a href="#">Corporate</a></li>
+                                    <li><a href="#">Customer</a></li>
+                                    <li><a href="#">Information</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Explore</h4>
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="about.html">About</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                    <!-- <li><a href="#">Proparties</a></li>
+                                    <li><a href="#">Licenses</a></li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-8">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Location</h4>
+                                <div class="footer-pera">
+                                    <p class="info1">Subscribe now to get daily updates</p>
+                                </div>
+                            </div>
+                            <!-- Form -->
+                            <div class="footer-form">
+                                <div id="mc_embed_signup">
+                                    <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative mail_part" novalidate="true">
+                                        <input type="email" name="EMAIL" id="newsletter-form-email" placeholder=" Email Address " class="placeholder hide-on-focus" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your email address'">
+                                        <div class="form-icon">
+                                            <button type="submit" name="submit" id="newsletter-submit" class="email_icon newsletter-submit button-contactForm">
+                                                SIGN UP
+                                            </button>
+                                        </div>
+                                        <div class="mt-10 info"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row d-flex justify-content-between align-items-center">
+                    <div class="col-xl-9 col-lg-8">
+                        <div class="footer-copy-right">
+                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <span class="bs">Business Shifu</span>
+  </p>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4">
+                        <!-- Footer Social -->
+                        <!-- <div class="footer-social f-right">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fas fa-globe"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End-->
+</footer>
+<!-- Scroll Up -->
+<div id="back-top" >
+    <a title="Go to Top" href="#"> <i id="go-up" class="fas fa-level-up-alt"></i></a>
+</div>
+
+        
+    </body>
+</html>
